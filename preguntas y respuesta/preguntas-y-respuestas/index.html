@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuestionario 1ra de Juan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f6fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 80%;
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .pregunta {
+      margin: 20px 0;
+    }
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .resultado {
+      margin-top: 25px;
+      padding: 15px;
+      background: #ecf0f1;
+      border-left: 5px solid #3498db;
+      font-weight: bold;
+    }
+    .incorrecta {
+      color: #c0392b;
+      margin-top: 10px;
+      font-weight: normal;
+    }
+    .oculto {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="nombreContainer">
+    <h1>Cuestionario sobre 1ra de Juan</h1>
+    <h2>Ingrese su nombre para comenzar</h2>
+    <input type="text" id="nombre" placeholder="Tu nombre..." style="width:100%;padding:10px;font-size:16px;">
+    <button onclick="empezar()">Comenzar</button>
+  </div>
+
+  <div class="container oculto" id="quizContainer">
+    <h1>Cuestionario de 1ra de Juan</h1>
+    <form id="quizForm">
+
+      <div class="pregunta">
+        <p>1. ¿Cuántos autores tiene la primera epístola de Juan?</p>
+        <label><input type="radio" name="p1" value="1"> 1</label>
+        <label><input type="radio" name="p1" value="2"> 2</label>
+        <label><input type="radio" name="p1" value="3"> 3</label>
+        <label><input type="radio" name="p1" value="4"> 4</label>
+      </div>
+
+      <div class="pregunta">
+        <p>2. ¿Quién es el escritor humano de 1ra de Juan?</p>
+        <label><input type="radio" name="p2" value="Juan Marcos"> Juan Marcos</label>
+        <label><input type="radio" name="p2" value="Juan el Bautista"> Juan el Bautista</label>
+        <label><input type="radio" name="p2" value="El apóstol Juan"> El apóstol Juan</label>
+      </div>
+
+      <div class="pregunta">
+        <p>3. El nombre Juan significa en hebreo:</p>
+        <label><input type="radio" name="p3" value="Jehová ha hecho gracia"> Jehová ha hecho gracia</label>
+        <label><input type="radio" name="p3" value="Jehová es fuerte"> Jehová es fuerte</label>
+        <label><input type="radio" name="p3" value="Jehová es Dios"> Jehová es Dios</label>
+        <label><input type="radio" name="p3" value="Boarnerges"> Boarnerges</label>
+      </div>
+
+      <div class="pregunta">
+        <p>4. ¿Quiénes fueron los primeros destinatarios de la epístola?</p>
+        <label><input type="radio" name="p4" value="La iglesia de Jerusalén"> La iglesia de Jerusalén</label>
+        <label><input type="radio" name="p4" value="Las Iglesias de Rep. Dominicana"> Las Iglesias de Rep. Dominicana</label>
+        <label><input type="radio" name="p4" value="Las Iglesias del Asia Menor"> Las Iglesias del Asia Menor</label>
+      </div>
+
+      <div class="pregunta">
+        <p>5. Eran sectas falsas que habían entrado a las Iglesias de Asia y causando gran división:</p>
+        <label><input type="radio" name="p5" value="gnósticos docetistas"> Gnósticos docetistas</label>
+        <label><input type="radio" name="p5" value="Fariseos"> Fariseos</label>
+        <label><input type="radio" name="p5" value="Saduceos"> Saduceos</label>
+      </div>
+
+      <div class="pregunta">
+        <p>6. Es un tema frecuente de 1ra de Juan</p>
+        <label><input type="radio" name="p6" value="El amor"> El amor</label>
+        <label><input type="radio" name="p6" value="El ayuno y la oración"> El ayuno y la oración</label>
+        <label><input type="radio" name="p6" value="Los himnos"> Los himnos</label>
+      </div>
+
+      <button type="button" onclick="calcular()">Enviar Respuestas</button>
+    </form>
+    <div class="resultado oculto" id="resultado"></div>
+  </div>
+
+  <script>
+    let participante = "";
+
+    function empezar() {
+      const nombreInput = document.getElementById("nombre").value.trim();
+      if (nombreInput === "") {
+        alert("Por favor ingrese su nombre.");
+        return;
+      }
+      participante = nombreInput;
+      document.getElementById("nombreContainer").classList.add("oculto");
+      document.getElementById("quizContainer").classList.remove("oculto");
+    }
+
+    function calcular() {
+      const respuestasCorrectas = {
+        p1: "2",  // ✅ respuesta actualizada
+        p2: "El apóstol Juan",
+        p3: "Jehová ha hecho gracia",
+        p4: "Las Iglesias del Asia Menor",
+        p5: "gnósticos docetistas",
+        p6: "El amor"
+      };
+
+      const preguntasTexto = {
+        p1: "¿Cuántos autores tiene la primera epístola de Juan?",
+        p2: "¿Quién es el escritor humano de 1ra de Juan?",
+        p3: "El nombre Juan significa en hebreo:",
+        p4: "¿Quiénes fueron los primeros destinatarios de la epístola?",
+        p5: "Eran sectas falsas que habían entrado a las Iglesias de Asia y causando gran división:",
+        p6: "Es un tema frecuente de 1ra de Juan"
+      };
+
+      let total = 0;
+      let correctas = 0;
+      let feedback = "";
+
+      for (let key in respuestasCorrectas) {
+        total++;
+        const seleccionada = document.querySelector(input[name="${key}"]:checked);
+        if (seleccionada && seleccionada.value === respuestasCorrectas[key]) {
+          correctas++;
+        } else {
+          feedback += `<div class="incorrecta">❌ ${preguntasTexto[key]}<br>
+          ✔ Respuesta correcta: <b>${respuestasCorrectas[key]}</b></div>`;
+        }
+      }
+
+      const puntaje = Math.round((correctas / total) * 100);
+
+      const resultadoDiv = document.getElementById("resultado");
+      resultadoDiv.classList.remove("oculto");
+      resultadoDiv.innerHTML = `¡${participante}, tu puntuación es: ${puntaje}/100!<br>
+      Respuestas correctas: ${correctas} de ${total}<br><br>
+      ${feedback === "" ? "✅ ¡Todas las respuestas son correctas!" : feedback}`;
+    }
+  </script>
+</body>
+</html>
